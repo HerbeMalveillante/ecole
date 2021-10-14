@@ -1,0 +1,1 @@
+# si on commence on a gagné : on doit s'arranger pour faire un carré : 
