@@ -12,14 +12,16 @@ print(ls)
 
 # le code précédent trie une liste de trois éléments
 
-def bubbleSort(lis):
-    for i in range(len(lis)-1):
 
-        for j in range(0, len(lis)-i-1):
-            if lis[j] > lis[j+1]:
-                lis[j], lis[j+1] = lis[j+1], lis[j]
+def bubbleSort(lis):
+    for i in range(len(lis) - 1):
+
+        for j in range(0, len(lis) - i - 1):
+            if lis[j] > lis[j + 1]:
+                lis[j], lis[j + 1] = lis[j + 1], lis[j]
 
     return lis
+
 
 randomList = [randint(-10, 10) for i in range(10)]
 print(randomList)
