@@ -155,9 +155,9 @@ class Partie():
         
         state = self.checkFin()
         if state == "zero":
-            print(f"Il ne reste plus d'allumettes sur le plateau : le {self.joueurActuel} a gagné !")
+            print(f"Il ne reste plus d'allumettes sur le plateau : le {'robot' if self.joueurActuel == 'joueur' else 'joueur'} a gagné !")
         else :
-            print(f"Il ne reste plus qu'une allumette sur le plateau : le {self.joueurActuel} a perdu !")
+            print(f"Il ne reste plus qu'une allumette sur le plateau : le {'robot' if self.joueurActuel == 'joueur' else 'joueur'} a perdu !")
 
 
 p = Partie(aleatoire = False)
