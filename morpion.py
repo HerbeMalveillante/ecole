@@ -15,20 +15,29 @@ class MorpionNim(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.geometry("640x640")
-        self.title("Title Here")
+        self.geometry("800x642")
+        self.title("Morpion de Nim")
 
         # label = ttk.Label(self, text="Tkinter window")
         # label.config(font=("Comic Sans MS",40))
         # label.pack()
 
-        self.canvas = tk.Canvas(self, height=640, width=640)
-        self.canvas.pack()
+        self.canvas = tk.Canvas(self, height=642, width=642)
+        self.canvas.pack(side="left")
+        self.frame = tk.LabelFrame(self, text="info")
+        self.frame.pack(side="right", fill = "both", expand = "yes")
+        self.label = tk.Label(self.frame, text="yooo")
+        self.label.pack()
     
     def drawGrid(self):
+        self.canvas.create_line((0, 214),(642, 214), width=10)
+        self.canvas.create_line((0, 428),(642, 428), width=10)
+        self.canvas.create_line((214, 0),(214, 642), width=10)
+        self.canvas.create_line((428, 0),(428, 642), width=10)
         
 
 root = MorpionNim()
+root.drawGrid()
  
 root.mainloop()
 
