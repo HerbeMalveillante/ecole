@@ -22,25 +22,25 @@ capteur_BME280.Calibration_Param_Load()
 sd = SD()
 os.mount(sd, '/sd')
 
-f = open('/sd/info.csv', 'w')
+with open('/sd/info.csv', 'w') as f:
 
 
-rtc = RTC()
-#Bouble Princiale
-# while True:
-for i in range(5):
+    rtc = RTC()
+    #Bouble Princiale
+    # while True:
+    for i in range(50):
 
-    heure = rtc.now()
+        heure = rtc.now()
 
 
-    temp = capteur_BME280.read_temp()
-    press = capteur_BME280.read_pression()
-    humi = capteur_BME280.read_humidity()
-    print("Température = ", temp)
-    print("Pression = ", press)
-    print("Humidité = ", humi)
-    print("-------------")
+        temp = capteur_BME280.read_temp()
+        press = capteur_BME280.read_pression()
+        humi = capteur_BME280.read_humidity()
+        print("Température = ", temp)
+        print("Pression = ", press)
+        print("Humidité = ", humi)
+        print("-------------")
 
-    f.write(str(heure[0]) + ";"+ str(heure[1]) + ";"+ str(heure[2]) + ";"+str(heure[3]) + ";"+str(heure[4]) + ";"+str(heure[5]) + ";"+str(temp) + ";"+ str(humi) + ";"+str(press)+"\r\n")
+        f.write(str(heure[0]) + ";"+ str(heure[1]) + ";"+ str(heure[2]) + ";"+str(heure[3]) + ";"+str(heure[4]) + ";"+str(heure[5]) + ";"+str(temp) + ";"+ str(humi) + ";"+str(press)+"\r\n")
 
-    time.sleep(5)
+        time.sleep(2)
