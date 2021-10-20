@@ -55,7 +55,32 @@ def saisie():
             break
     return entree
 
-# print(saisie())
+
+    
+
+def saisieSansTry():
+
+    def check(entree):
+        chiffres = "0123456789"
+        for char in entree :
+            if char not in chiffres :
+                return False  
+        return True 
+
+    while True :
+        entree = input("Entrez un nombre entier supérieur ou égal à 1 : ")
+
+        # on vérifie que entrée ne possède que des chiffres
+        if not check(entree) :
+            continue
+        if int(entree) >= 1:
+            break
+    return entree
+
+print(saisieSansTry())
+
+
+
 
 # Question 5
 def alea(n, a, b):
