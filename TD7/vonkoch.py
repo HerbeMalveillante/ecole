@@ -24,8 +24,7 @@ def triangle(l,n):
         turtle.right(120)
     turtle.end_fill()
 
-for i in range(5):
-    turtle.color(colors[i])
-    triangle(300, 5-i-1)
+
+triangle(300, 6)
 turtle.update()
 turtle.exitonclick()
