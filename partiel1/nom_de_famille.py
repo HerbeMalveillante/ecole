@@ -110,6 +110,22 @@ def aleaUnique(n,a,b):
 
 print(aleaUnique(10, 1, 15))
 
+
+def aleaUnique2(n,a,b):
+    if (b - a) + 1 < n :
+        print("Desolé, il n'est pas possible de créer une liste de valeurs uniques avec les arguments rentrés.")
+        return
+    
+    # cette version est moins optimisée mais plus simple à comprendre
+    listeRandom = []
+    while len(listeRandom) < n :
+        choice = random.randint(a, b)
+        if choice not in listeRandom:
+            listeRandom.append(choice)
+    return listeRandom
+
+print(aleaUnique2(10, 1, 15))
+
 # Question 7
 def ecart(e):
     VALEUR_EXACTE = 0.32209960580139874
