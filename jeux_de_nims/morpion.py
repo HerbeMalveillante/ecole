@@ -1,4 +1,4 @@
-# si on commence on a gagné : on doit s'arranger pour faire un carré : 
+# si on commence on a gagné : on doit s'arranger pour faire un carré :
 
 # grille de trois par trois (peut être représenté par un nombre en binaire de huit bits)
 # chaque tour, on place une, deux, ou trois croix sur une même ligne ou colonne (pas en diagonale)
@@ -25,19 +25,18 @@ class MorpionNim(tk.Tk):
         self.canvas = tk.Canvas(self, height=642, width=642)
         self.canvas.pack(side="left")
         self.frame = tk.LabelFrame(self, text="info")
-        self.frame.pack(side="right", fill = "both", expand = "yes")
+        self.frame.pack(side="right", fill="both", expand="yes")
         self.label = tk.Label(self.frame, text="yooo")
         self.label.pack()
-    
+
     def drawGrid(self):
-        self.canvas.create_line((0, 214),(642, 214), width=10)
-        self.canvas.create_line((0, 428),(642, 428), width=10)
-        self.canvas.create_line((214, 0),(214, 642), width=10)
-        self.canvas.create_line((428, 0),(428, 642), width=10)
-        
+        self.canvas.create_line((0, 214), (642, 214), width=10)
+        self.canvas.create_line((0, 428), (642, 428), width=10)
+        self.canvas.create_line((214, 0), (214, 642), width=10)
+        self.canvas.create_line((428, 0), (428, 642), width=10)
+
 
 root = MorpionNim()
 root.drawGrid()
- 
-root.mainloop()
 
+root.mainloop()

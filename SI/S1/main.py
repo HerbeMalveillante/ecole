@@ -20,7 +20,8 @@ def pyms():
 
         delay -= 0.01
 
+
 bus_i2c = I2C(0)
-bus_i2c.init(I2C.MASTER, baudrate = 400000)
+bus_i2c.init(I2C.MASTER, baudrate=400000)
 adr = bus_i2c.scan()
 print("Adresse périphérique I2C :", adr)

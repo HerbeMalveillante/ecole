@@ -2,8 +2,10 @@ def listeMots(s):
     liste = s.split(" ")
     return liste
 
+
 def nbMots(s):
     return len(listeMots(s))
+
 
 def motsLesPlusLongs(s):
     liste = listeMots(s)
@@ -16,7 +18,8 @@ def motsLesPlusLongs(s):
             maxLen = len(i)
         elif len(i) == maxLen:
             maxListe.append(i)
-    
+
     return maxListe
+
 
 print(motsLesPlusLongs("Ceci est une phrase à tester"))
