@@ -6,7 +6,7 @@
 
 Ce projet contient tous les fichiers que j'ai pu écrire en cours d'informatique à l'école. Tout est à prendre avec des pincettes car pas forcément utile, ni correct.
 
-je rajoute un truc vite fait en deuspi
+je rajoute un truc vite fait en deuspi dzadaz
 
 ## 🇬🇧 [English]
 
