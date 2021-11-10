@@ -6,6 +6,8 @@
 
 Ce projet contient tous les fichiers que j'ai pu écrire en cours d'informatique à l'école. Tout est à prendre avec des pincettes car pas forcément utile, ni correct.
 
+je rajoute un truc vite fait en deuspi
+
 ## 🇬🇧 [English]
 
 This project contains all the files that I have written in computer science class at school. All of them are to be taken with care because they are not necessarily useful, nor correct.
