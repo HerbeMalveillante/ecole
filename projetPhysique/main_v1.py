@@ -31,43 +31,55 @@ def draw_trajectory_graph(initialSpeed, initialHeight, angle, gravity):
 # run the GUI
 root = tkinter.Tk()
 root.title("Projectile")
-root.geometry("400x400")
+# root.geometry("800x800")
 
 
 # adds two separate sections to the GUI
 frame1 = tkinter.Frame(root)
-frame1.pack()
+frame1.grid(column=0, row=0)
 frame2 = tkinter.Frame(root)
-frame2.pack()
+frame2.grid(column=1, row=0)
+
+# update the graph automatically as the value of the sliders change
+def update_graph(_):
+    global frame2
+    """clears the first section from xzany tkinter graph it contains and draws a new one using the values from the sliders."""
+    frame2.destroy()
+    frame2 = tkinter.Frame(root)
+    frame2.grid(column=1, row=0)
+    draw_graph(initialSpeedSlider.get(), initialHeightSlider.get(), angleSlider.get(), gravitySlider.get())
+
+def draw_graph(initialSpeed, initialHeight, angle, gravity):
+    # adds the trajectory of the projectile in the first section
+    figureObject = plt.Figure(figsize=(10, 10), dpi=100)
+    figure = figureObject.gca()
+
+    x, y = draw_trajectory_graph(initialSpeed, initialHeight, angle, gravity)
+    # x, y = draw_trajectory_graph(100, 0, math.pi / 4, 9.81)
+    figure.plot(x, y)
+    figure.set_xlabel('Time (s)')
+    figure.set_ylabel('Height (m)')
+    figure.set_title('Trajectory of a projectile')
+    figure.text(0, 0, 'Initial speed = ' + str(initialSpeed) + ' m/s\nInitial height = ' + str(initialHeight) + ' m\nAngle = ' + str(angle) + ' rad\nGravity = ' + str(gravity) + ' m/s^2')
+    figure.grid(True)
+    # display the graph in the first section of the tkinter GUI
+    canvas = FigureCanvasTkAgg(figureObject, master=frame2)
+    canvas.draw()
+    canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
 
 # adds four number selectors to the second section
-initialSpeed = tkinter.Scale(frame1, from_=0, to=100, orient=tkinter.HORIZONTAL, label="Initial speed (m/s)")
-initialSpeed.pack(side=tkinter.LEFT)
-initialHeight = tkinter.Scale(frame1, from_=0, to=100, orient=tkinter.HORIZONTAL, label="Initial height (m)")
-initialHeight.pack(side=tkinter.LEFT)
-angle = tkinter.Scale(frame1, from_=0, to=math.pi, orient=tkinter.HORIZONTAL, label="Angle (rad)")
-angle.pack(side=tkinter.LEFT)
-gravity = tkinter.Scale(frame1, from_=0, to=10, orient=tkinter.HORIZONTAL, label="Gravity (m/s^2)")
-gravity.pack(side=tkinter.LEFT)
-
-# adds the trajectory of the projectile in the first section
-
-figureObject = plt.Figure(figsize=(5, 4), dpi=100)
-figure = figureObject.gca()
-
-x, y = draw_trajectory_graph(initialSpeed.get(), initialHeight.get(), angle.get(), gravity.get())
-# x, y = draw_trajectory_graph(100, 0, math.pi / 4, 9.81)
-figure.plot(x, y)
-figure.set_xlabel('Time (s)')
-figure.set_ylabel('Height (m)')
-figure.set_title('Trajectory of a projectile')
-figure.text(0, 0, 'Initial speed = ' + str(initialSpeed.get()) + ' m/s\nInitial height = ' + str(initialHeight.get()) + ' m\nAngle = ' + str(angle.get()) + ' rad\nGravity = ' + str(gravity.get()) + ' m/s^2')
-figure.grid(True)
-# display the graph in the first section of the tkinter GUI
-canvas = FigureCanvasTkAgg(figureObject, master=frame2)
-canvas.draw()
-canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
-
+initialSpeedSlider = tkinter.Scale(frame1, from_=0, to=200, orient=tkinter.HORIZONTAL, label="Initial speed (m/s)", command=update_graph, length=200)
+initialSpeedSlider.pack()
+initialSpeedSlider.set(10)
+initialHeightSlider = tkinter.Scale(frame1, from_=0, to=100, orient=tkinter.HORIZONTAL, label="Initial height (m)", command=update_graph, length=200)
+initialHeightSlider.pack()
+initialHeightSlider.set(0)
+angleSlider = tkinter.Scale(frame1, from_=0,  to=math.pi, orient=tkinter.HORIZONTAL, resolution=.1 ,  label="Angle (rad)", command=update_graph, length=200)
+angleSlider.pack()
+angleSlider.set(math.pi / 4)
+gravitySlider = tkinter.Scale(frame1,  from_=1, to=50, orient=tkinter.HORIZONTAL, label="Gravity (m/s^2)", command=update_graph, length=200)
+gravitySlider.pack()
+gravitySlider.set(9.81)
 
 
 root.mainloop()
