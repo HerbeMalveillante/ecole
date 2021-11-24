@@ -4,11 +4,17 @@ import math
 import tkinter
 import random
 
-trajectories = []
+trajectories = [] # Creates the base list containing the trajectories
 
 class Trajectory():
+    """
+    The class used to create and represent a trajectory
+    """
 
     def __init__(self, initialSpeed, initialHeight, angle, gravity):
+        """
+        Initialize the trajectory
+        """
         self.initialSpeed = initialSpeed
         self.initialHeight = initialHeight
         self.angle = angle
@@ -25,18 +31,31 @@ class Trajectory():
             x.append(i)
             y.append(self.initialHeight + (self.initialSpeed * math.sin(self.angle) * i) - (self.gravity * i * i) / 2)
             i += 0.05
-            if y[-1] < 0:
+            if y[-1] < 0: # If the trajectory is over (ball touches the ground)
                 break
         
         return x, y
+    
+    def get_trajectory_with_air_resistance(self):
+        
+        
+        pass
 
 def add_trajectory(listbox):
+    """
+    Add a trajectory to the list of trajectories
+    Updates the listbox with the new trajectory.
+    """
     trajectories.append(Trajectory(10, 10, math.pi/4, 9.81))
     listbox.insert(tkinter.END, 'Trajectory ' + str(len(trajectories)))
     listbox.itemconfig(len(trajectories)-1, bg=trajectories[-1].color)
     update_graph()
 
 def remove_trajectory(listbox):
+    """
+    Remove a trajectory from the list of trajectories
+    Updates the listbox with the removed trajectory.
+    """
     try :
         w = listbox.curselection()[0]
     except IndexError:
@@ -48,6 +67,9 @@ def remove_trajectory(listbox):
 
 
 def on_select(event, label1, label2, label3, label4, label5, initialSpeedSlider, initialHeightSlider, angleSlider, gravitySlider):
+    """
+    When a trajectory is selected, update the labels and the sliders with the values of the selected trajectory
+    """
     w = event.widget
     index = int(w.curselection()[0])
     traj = trajectories[index]
@@ -64,9 +86,12 @@ def on_select(event, label1, label2, label3, label4, label5, initialSpeedSlider,
     gravitySlider.set(traj.gravity)
 
 def on_update_slider(listbox, initialSpeedSlider, initialHeightSlider, angleSlider, gravitySlider):
+    """
+    When the sliders are updated, update the values of the selected trajectory and the corresponding labels
+    """
     try :
         w = listbox.curselection()[0]
-    except IndexError:
+    except IndexError: # If no trajectory is selected
         tkinter.messagebox.showinfo("Error", "Please select a trajectory")
         return
     trajectories[w].initialSpeed = initialSpeedSlider.get()
@@ -82,24 +107,27 @@ def on_update_slider(listbox, initialSpeedSlider, initialHeightSlider, angleSlid
     update_graph()
 
 def update_graph():
+    """
+    Update the graph with the new trajectories.
+    """
 
-    global frame2
-    frame2.destroy()
-    frame2 = tkinter.Frame(root)
-    frame2.grid(column=1, row=0)
+    global frame2 # The frame containing the graph. Must be global to be able to update it.
+    frame2.destroy() # Destroy the frame containing the graph
+    frame2 = tkinter.Frame(root) # Create a new frame
+    frame2.grid(column=1, row=0) # Place it in the second column and first row of the main window
 
-    figureObject = plt.Figure(figsize=(6, 6), dpi=100)
-    figure = figureObject.gca()
+    figureObject = plt.Figure(figsize=(6, 6), dpi=100) # Create a new figure
+    figure = figureObject.gca() # Get the axis of the figure
 
     for i in trajectories:
-        x, y = i.get_trajectory()
-        figure.plot(x, y, color=i.color)
+        x, y = i.get_trajectory() # Get the trajectory
+        figure.plot(x, y, color=i.color) # Plot the trajectory
     figure.set_xlabel('Time (s)')
     figure.set_ylabel('Height (m)')
     figure.set_title('Trajectory')
     figure.grid(True)
-    canvas = FigureCanvasTkAgg(figureObject, master=frame2)
-    canvas.draw()
+    canvas = FigureCanvasTkAgg(figureObject, master=frame2) # Create a new canvas with the figure in it
+    canvas.draw() # Draw the canvas
     canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1) # display the graph
 
 

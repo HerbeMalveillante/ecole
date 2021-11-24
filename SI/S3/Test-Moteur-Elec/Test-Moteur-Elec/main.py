@@ -23,7 +23,7 @@ V_MIN = 0.25
 # Routines de déplacements du robot
 def Avancer(vitesse):
     Moteur_Droit.Cmde_moteur(SENS_HORAIRE, vitesse)
-    Moteur_Gauche.Cmde_moteur(SENS_ANTI_HORAIRE, vitesse)
+    Moteur_Gauche.Cmde_moteur(SENS_ANTI_HORAIRE, vitesse-0.2)
 def Reculer(vitesse):
     Moteur_Droit.Cmde_moteur(SENS_ANTI_HORAIRE, vitesse)
     Moteur_Gauche.Cmde_moteur(SENS_HORAIRE, vitesse)
@@ -82,22 +82,8 @@ while True :
     print("--------------")
     print('-> Démarage')
     print('-Avancer')
-    Avancer(V_MIN)
-    time.sleep(2)
-    """
-    print('-Reculer')
-    Reculer(V_MIN)
-    time.sleep(2)
-    print('-Pivoter droite')
-    Pivoter_droite(V_MIN)
-    time.sleep(2)
-    print('-Pivoter gauche')
-    Pivoter_gauche(V_MIN)
-    time.sleep(2)
-    print('-> Arret')
-    Arret()
-    time.sleep(2)
-    """
+    Avancer(V_MOYEN)
+    time.sleep(5)
 '''
 Index = 0
 while True :
