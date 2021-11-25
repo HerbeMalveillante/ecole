@@ -68,7 +68,7 @@ class Toile():
 
 t = Toile()
 
-for i in range(100w):
+for i in range(100):
     t.ajouteMouche()
 
 exitonclick()
