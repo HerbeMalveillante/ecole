@@ -13,7 +13,7 @@ class Trajectory():
 
     def __init__(self, initialSpeed, initialHeight, angle, gravity):
         """
-        Initialize the trajectory
+        Initialize the trajectorieeeee
         """
         self.initialSpeed = initialSpeed
         self.initialHeight = initialHeight
@@ -30,7 +30,7 @@ class Trajectory():
         while True:
             x.append(i)
             y.append(self.initialHeight + (self.initialSpeed * math.sin(self.angle) * i) - (self.gravity * i * i) / 2)
-            i += 0.05
+            i += 0.1
             if y[-1] < 0: # If the trajectory is over (ball touches the ground)
                 break
         
