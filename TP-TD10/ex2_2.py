@@ -1,15 +1,16 @@
-class Inventaire():
-
+class Inventaire:
     def __init__(self, nom, inventaire):
         self.nom = nom
         self.inventaire = inventaire
-    
+
     def __str__(self):
-        return f"{self.nom}:\n" + "\n".join(["\t" + str(k) + " : " + str(v) for k, v in sorted(self.inventaire.items())])
+        return f"{self.nom}:\n" + "\n".join(
+            ["\t" + str(k) + " : " + str(v) for k, v in sorted(self.inventaire.items())]
+        )
 
     def __add__(self, other):
         newInv = other.inventaire.copy()
-        for k,v in self.inventaire.items():
+        for k, v in self.inventaire.items():
             if k in newInv:
                 newInv[k] += v
             else:

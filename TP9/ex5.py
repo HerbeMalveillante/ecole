@@ -1,4 +1,4 @@
-class Joueur():
+class Joueur:
 
     cases = ["   ", "   ", "   "]
     fin = False
@@ -7,12 +7,14 @@ class Joueur():
         # strips the name of the player to get the first 20 letters
         self.nom = nom[:20]
         self.symbole = symbole
-    
+
     @staticmethod
     def afficheConvention():
-        print("""(1,1) (1,2) (1,3)
+        print(
+            """(1,1) (1,2) (1,3)
 (2,1) (2,2) (2,3)
-(3,1) (3,2) (3,3)""")
+(3,1) (3,2) (3,3)"""
+        )
 
     @classmethod
     def afficheGrille(cls):
@@ -28,7 +30,7 @@ class Joueur():
         for i in range(3):
             print(f"|{cls.cases[i][0]}|{cls.cases[i][1]}|{cls.cases[i][2]}|")
             print("-------")
-    
+
     @classmethod
     def gagne(cls):
         """returns True if the player wins, False otherwise"""
@@ -53,11 +55,6 @@ class Joueur():
 
         return
 
-
-
-
-
-
     def joue(self):
         """asks the coordinates to play to the player until they are valid and the specified case is empty,
         puts the player's symbol at the right place, displays the grid and checks if the player has won."""
@@ -72,16 +69,20 @@ class Joueur():
                     raise ValueError
                 if self.cases[coord[0] - 1][coord[1] - 1] != " ":
                     raise ValueError
-                
+
                 # creates a new string that contains the player's symbol at the selected coordinates
-                self.cases[coord[0] - 1] = self.cases[coord[0] - 1][:coord[1] - 1] + self.symbole + self.cases[coord[0] - 1][coord[1]:]
+                self.cases[coord[0] - 1] = (
+                    self.cases[coord[0] - 1][: coord[1] - 1]
+                    + self.symbole
+                    + self.cases[coord[0] - 1][coord[1] :]
+                )
 
                 self.gagne()
                 self.matchNul()
                 break
             except ValueError:
                 print("Coordonnées invalides.")
-    
+
     @classmethod
     def matchNul(cls):
         """returns True if the player has played all the cases, False otherwise"""
@@ -91,6 +92,7 @@ class Joueur():
                     return False
         cls.fin = True
         return True
+
 
 def main():
     j1 = Joueur("Joueur 1", "x")
@@ -102,11 +104,10 @@ def main():
             Joueur.afficheGrille()
             if Joueur.matchNul():
                 print("Match nul !")
-            else :
+            else:
                 print(f"{currentPlayer.nom} a gagné !")
             break
         currentPlayer = j2 if currentPlayer == j1 else j1
 
+
 main()
-        
-        
