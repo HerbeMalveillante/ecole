@@ -4,9 +4,11 @@ from micropython import const
 from machine import *
 from DRV8833 import *
 from BME280 import *
+from VL6180X import *
 import pycom
 import time
 import os
+
 
 #Variables globales pour moteurs et pont en H
 DRV8833_Sleep_pin = 'P20' # Pin SLEEP
@@ -14,6 +16,9 @@ DRV8833_AIN1 = 'P22' # Entrée PWM moteur A : AIN1
 DRV8833_AIN2 = 'P21' # Entrée PWM moteur A : AIN2
 DRV8833_BIN1 = 'P19' # Entrée PWM moteur B : BIN1
 DRV8833_BIN2 = 'P12' # Entrée PWM moteur B : BIN2
+
+
+
 
 # Vitesse de rotation des roues
 V_MAX = 1.0
@@ -65,30 +70,100 @@ rtc = RTC()
 rtc.init((2020,10,26,0,0,0,0,0))
 jour = rtc.now()
 
-date = "Date : "+str(jour[0])+"/"+str(jour[1])+"/"+str(jour[2])
+# CAPTEUR DE DISTANCE
+# Variables globales pour les trois capteurs VL6180X
+# tableaux de 3 cases initialisees a -1
+DISTANCE = [-1, -1]
+LUMINOSITE = [-1.0, -1.0]
+# Nombre de capteurs VL6180X utilisés
+N_VL6180X = const(2)
 
+# Ressource GIPo de la carte WiPy3.0 affectée au contrôle
+# du capteur VL6180X
+VL6180X_CE_Pin = ('P3', 'P5')
+# Adressage I2C des capteurs VL6180X : par défaut 0x29 soit 41
+VL6180X_I2C_adr_defaut = const(0x29)
+VL6180X_I2C_Adr = (const(0x2A), const(0x2B))
+
+print("Configuration des broches CE des capteurs VL6180X")
+# Liste des variables Pin correspondant aux broches CE
+VL6180X_GPIO_CE_Pin = []
+for pin in VL6180X_CE_Pin:
+    VL6180X_GPIO_CE_Pin.append(Pin(pin, mode=Pin.OUT))
+    # inhiber chacun des capteurs de distances
+    VL6180X_GPIO_CE_Pin[-1].value(0)
+print("Fin de la configuration des broches CE des capteurs VL6180X")
+print("Initialisation des capteurs de distance")
+capteur_VL6180X = []
+for i in range(N_VL6180X):
+    VL6180X_GPIO_CE_Pin[i].value(1)
+    time.sleep(0.002)
+    capteur_VL6180X.append(VL6180X(VL6180X_I2C_adr_defaut, bus_i2c))
+    # init nouvelle adr I2C
+    capteur_VL6180X[i].Modif_Adr_I2C(VL6180X_GPIO_CE_Pin[i], VL6180X_I2C_Adr[i], VL6180X_I2C_adr_defaut)
+print("Fin de l'initialisation des capteurs de distance")
+
+
+# configuration de la broche dédiée au contrôle du capteur :
+# VL6180X_GPIO_CE_Pin = Pin(VL6180X_CE_Pin, mode=Pin.OUT)
+# VL6180X_GPIO_CE_Pin.value(1) # Activer le capteur de distance
+# capteur_d_l_VL6180X = VL6180X(VL6180X_I2C_adr_defaut, bus_i2c)
+
+date = "Date : "+str(jour[0])+"/"+str(jour[1])+"/"+str(jour[2])
 
 print("L'adresse du périphérique I2C est :",adr)
 print ('Valeur ID BME280 :', hex (Id_BME280[0]))
+
 while True :
+
+    # pression et température
     jour = rtc.now()
     temps = str(jour[3])+"h "+str(jour[4])+"m "+str(jour[5])+"s"
     temp = capteur_BME280.read_temp()
     humi = capteur_BME280.read_humidity()
     pres = capteur_BME280.read_pression()
+
+    for i in range(N_VL6180X):
+        DISTANCE[i] = capteur_VL6180X[i].range_mesure()
+        LUMINOSITE[i] = capteur_VL6180X[i].ambiant_light_mesure()
+
     print("-------------------------------------------------------------------")
     print("Temps passé :",temps,"- Température :","%.2f"%temp,"- Humidité :","%.2f"%humi,"- Préssion :","%.2f"%pres)
-
+    print("Distance", DISTANCE)
+    print("Luminosité", LUMINOSITE)
     print("--------------")
-    print('-> Démarage')
-    print('-Avancer')
-    Avancer(V_MOYEN)
-    time.sleep(5)
-'''
-Index = 0
-while True :
-    print('Index : ', Index)
-    # Définition d'une séquence de mouvements
-    time.sleep(0.25)
-    Index +=1
-'''
+
+    print(LUMINOSITE)
+
+    nombreAlea = int(str(LUMINOSITE[0]*LUMINOSITE[1])[-1])
+    print("nombreAlea", nombreAlea)
+
+
+
+    if nombreAlea%4 == 0:
+        print("CHANGEMENT DE DIRECTION ALEATOIRE")
+        direction = "gauche" if nombreAlea%2 == 0 else "droite"
+        if direction == "gauche":
+            Pivoter_gauche(V_MOYEN)
+            print("PIVOTER GAUCHE")
+            time.sleep(2)
+        else :
+            Pivoter_droite(V_MOYEN)
+            print("PIVOTER DROITE")
+            time.sleep(2)
+    else:
+        if DISTANCE[0] >= 100:
+            Avancer(V_MOYEN)
+            print("AVANCER")
+            time.sleep(1)
+        else :
+            print("OULALAH ON VA SE COGNER")
+            direction = "gauche" if nombreAlea%2 == 0 else "droite"
+            if direction == "gauche":
+                Pivoter_gauche(V_MOYEN)
+                print("ON EVITE PAR LA GAUCHE")
+                time.sleep(2)
+            else :
+                Pivoter_droite(V_MOYEN)
+                print("ON EVITE PAR LA DROITE")
+                time.sleep(2)
