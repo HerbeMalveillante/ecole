@@ -6,10 +6,6 @@
 ![last commit badge](https://img.shields.io/github/last-commit/herbemalveillante/ecole)
 ![code size badge](https://img.shields.io/github/languages/code-size/herbemalveillante/ecole)
 
-
-
-
-
 ## 🇫🇷 [French]
 
 Ce projet contient tous les fichiers que j'ai pu écrire en cours d'informatique à l'école. Tout est à prendre avec des pincettes car pas forcément utile, ni correct.
