@@ -1,0 +1,50 @@
+
+Ce dossier contient les vues des pages, avec et sans titre. 
+Le dossier pages+images contient les images et les textes utiles aux pages. 
+
+
+Page "shannon"
+--------------------------------------------------------------------------------
+- fond de la page en bleu-vert (#BBDDDD)
+- page : largeur 800px, 30px marge autour, fond blanc
+- page : 20px marge intérieure
+- texte : justifié, taille 100%, sans-serif
+- titre souligné rouge (red), 3px, sur 75% de la largeur
+- pas de modification de la taille de l'image
+- noms propres en petites majuscules (font-variant-caps)
+- le lien "théorie de l'information" pointe vers "infotheory" (2e page)
+- le lien "aller au quizz" pointe vers "quizz" (3e page)
+- les 2 images "HTML5" et "CSS3" sont assemblées dans un tableau
+- ce tableau est centré dans la zone de texte
+- marge à droite et en bas de l'image de 30px
+- lien "aller au quizz" centré dans la page
+
+
+Page "infotheory"
+--------------------------------------------------------------------------------
+- style de base identique aux autres pages
+- le titre de l'article est surligné en jaune clair (lightyellow) et en italique
+- la mention "Source" est en italique, alignée à droite
+- le nom "Claude Shannon" est un lien vers la page "shannon"
+
+
+Page "quizz"
+--------------------------------------------------------------------------------
+- style de base identique aux autres pages
+- les zones de saisie (question, texte) ont un fond gris (intensité 240, ou F0)
+- les zones de saisie ont une bordure droite et basse en points (dotted) de 1px et grise (grey)
+- l'espacement avec le contenu dans ces zones des de 10px
+- les marges autour de ces zones sont de 20px
+- la taille des titres des questions est à 120%
+- le bouton de saisie est centré
+
+Formulaire :
+--------------------------------------------------------------------------------
+- Le formulaire enverra la valeur 1 à la question Q1 (sur la nationalité), pour la réponse "Anglaise", ou la valeur 2 si c'est la réponse "Irlandaise" et enfin la valeur 3 si c'est "Américaine". 
+
+- De la même manière, dans l'ordre présenté, le formulaire enverra les valeurs 1, 2 et 3 à la question Q2 (sur la théorie). 
+
+- Le numéro d'étudiant est obligatoire, composé de 8 chiffres
+- le formulaire se poste les données à lui-même, en POST
+
+

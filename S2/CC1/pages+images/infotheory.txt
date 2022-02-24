@@ -1,0 +1,17 @@
+Théorie de l'information
+
+Théorie de l'information 
+
+
+La théorie de l'information est une théorie probabiliste permettant de quantifier le contenu moyen en information d'un ensemble de messages, dont le codage informatique satisfait une distribution statistique précise. Ce domaine trouve son origine scientifique avec Claude Shannon qui en est le père fondateur avec son article A Mathematical Theory of Communication publié en 1948.
+
+Parmi les branches importantes de la théorie de l'information de Shannon on peut citer :
+
+- le codage de l'information ;
+- la mesure quantitative de redondance d'un texte ;
+- la compression de données ; 
+- la cryptographie. 
+
+Dans un sens plus général, une théorie de l'information est une théorie visant à quantifier et qualifier la notion de contenu en information présent dans un ensemble de données. À ce titre, il existe une autre théorie de l'information : la théorie algorithmique de l'information, créée par Kolmogorov, Solomonoff et Chaitin au début des années 1960.
+
+Source : Wikipedia

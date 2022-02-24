@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Quizz</title>
+</head>
+<body>
+
+    <div class="page">
+        <h1>Quizz !</h1>
+        <form method="post" class="questionform">
+            <div class="question">
+                <h2>Quelle est la nationalité de Claude Shannon ?</h2>
+                <ul>
+                    <li><input type="radio" id="1" name="nationalite"><label for="1">Anglaise</label></li>
+                    <li><input type="radio" id="2" name="nationalite"><label for="2">Irlandaise</label></li>
+                    <li><input type="radio" id="3" name="nationalite"><label for="3">Américaine</label></li>
+                </ul>
+            </div>
+            <div class="question">
+                <h2>Il est considéré comme le père de quelle théorie ?</h2>
+                <ul>
+                    <li><input type="radio" id="1" name="theorie"><label for="1">la théorie des probabilités</label></li>
+                    <li><input type="radio" id="2" name="theorie"><label for="2">la théorie de l'information</label></li>
+                    <li><input type="radio" id="3" name="theorie"><label for="3">la théorie du chaos</label></li>
+                </ul>
+            </div>
+            <div class="question">
+                <h2>Identification</h2>
+                <input type="text" placeholder="00000000" id="identification" name="identification" pattern="^[0-9]{8}$">
+                <label for="indentification">Quel est votre numéro d'étudiant :</label>
+                <br>
+            </div>
+            <input id="submitbutton" type="submit" value="Envoyer mes réponses">
+        </form>
+    </div>
+    
+</body>
+</html>
