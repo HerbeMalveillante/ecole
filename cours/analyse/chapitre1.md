@@ -194,4 +194,8 @@ Ce théorème sert par exemple à démontrer le théorème des valeurs interméd
 
 > Une partie $E$ est dite dense dans $\mathbb{R}$ quand tout intervalle ouvert contient une infinité de points de $E$.
 
-<!-- TODO : FINIR LE CHAPITRE 1 EN ANALYSE -- >
+**Exemple 14** : L'exemple 12 signifie que $\mathbb{Q}$ est dense dans $\mathbb{R}$, et de même pour l'ensemble des irrationnels.
+
+**Exemple 15 [admis]** : La notion de valeu rdécimale approchée à 10^{-n} près d'un réel signifie que l'ensemble des nombres décimaux, à savoir des rationnels de la forme $\frac{A}{10^n}$, est dense dans $\mathbb{R}$.
+
+**Exemple 16 [admis]** : L'ensemble des termes de la suite ($sin(n)$) est dense dans $[-1, 1]$. Tout intervalle ouvert inclus dans $[-1, 1]$ contient une infinité de termes de la suite.
